@@ -390,6 +390,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
+var BUILD='20261002-210119';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
@@ -492,7 +493,7 @@ function arm(){
 function resetAll(){
   $('helpSheet').hidden=true;stopDone();viewRules=false;i=0;cur=null;sel={};RES=[];lookupName='';lookupL4='';consentIso='';busy=false;
   $('nm').value='';$('ph').value='';$('err').textContent='';$('rerr').textContent='';$('cerr').textContent='';
-  show();
+  show();setTimeout(checkUpdate,500);
 }
 function openRules(){
   var h=['s3','s4','s5','s6'].map(function(id){return $(id).innerHTML}).join('');
@@ -561,7 +562,15 @@ $('helpSheet').onclick=function(e){if(e.target===this)this.hidden=true};
 $('rulesBtn').onclick=openRules;
 ['pointerdown','keydown','input','touchstart'].forEach(function(ev){document.addEventListener(ev,function(){arm()},true)});
 window.addEventListener('resize',function(){if(i==2&&cur){pick(cur)}});
-build();show();
+/* 새 버전이 올라오면 처음 화면에서 알아서 새로 고침한다 (태블릿에서 캐시를 지우지 않아도 되게) */
+function checkUpdate(){
+  if(location.protocol=='file:'||BUILD=='20261002-210119')return;
+  fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){
+    if(j&&j.v&&j.v!==BUILD&&i==0&&!viewRules&&!busy&&!$('nm').value&&!$('ph').value)location.replace(location.pathname+'?v='+encodeURIComponent(j.v));
+  }).catch(function(){});
+}
+setInterval(checkUpdate,300000);
+build();show();checkUpdate();
 </script>
 
 </body>
