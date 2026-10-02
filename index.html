@@ -390,7 +390,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261002-210230';
+var BUILD='20261002-211742';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
@@ -398,9 +398,10 @@ var KEY='';
   if(hm){KEY=decodeURIComponent(hm[1]);try{localStorage.setItem('csk',KEY)}catch(e){}try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
   else{try{KEY=localStorage.getItem('csk')||''}catch(e){}}
 })();
-var SITE_XY={'1':[575,1393],'2':[586,1327],'3':[587,1275],'4':[590,1188],'5':[592,1112],'6':[587,1023],'7':[592,953],'8':[613,873],'9-1':[338,1327],'9':[348,1237],'10':[358,1163],'11':[366,1090],'12':[378,1017],'13':[385,940],'14':[388,851],'15':[420,443],'16':[456,277],'17':[546,326],'18':[604,396],'19':[646,470],'20':[686,534],'21':[295,192],'22':[452,143],'데크1':[197,1290],'데크2':[116,1136],'데크3':[234,996],'데크4':[134,820],'파쇄석5':[178,640],'파쇄석6':[70,600]};
+var SITE_XY={'1':[575,1393],'2':[586,1327],'3':[587,1275],'4':[590,1188],'5':[592,1112],'6':[587,1023],'7':[592,953],'8':[613,873],'9-1':[338,1327],'9':[348,1237],'10':[358,1163],'11':[366,1090],'12':[378,1017],'13':[385,940],'14':[388,851],'15':[420,443],'16':[456,277],'17':[546,326],'18':[604,396],'19':[646,470],'20':[686,534],'21':[295,192],'22':[452,143],'B1':[197,1290],'B2':[116,1136],'B3':[234,996],'B4':[134,820],'B5':[178,640],'B6':[70,600]};
+// 2026-10-02 원장 백패킹 표기 B1~B6 통일. 옛 이름(데크1·파쇄석5)이 와도 B로 바꿔 쓴다.
 function siteShort(s){var m=String(s).match(/^(데크|파쇄석)(\d)$/);return m?'B'+m[2]:String(s)}
-function siteName(s){var m=String(s).match(/^(데크|파쇄석)(\d)$/);return m?'B'+m[2]:s+'번'}
+function siteName(s){var k=siteShort(s);return /^B\d$/.test(k)?k:k+'번'}
 var DOW=['일','월','화','수','목','금','토'];
 function fmt(ymd){var p=String(ymd).split('-');if(p.length<3)return ymd;var d=new Date(+p[0],+p[1]-1,+p[2]);return (+p[1])+'월 '+(+p[2])+'일('+DOW[d.getDay()]+')'}
 var RES=[],sel={},lookupName='',lookupL4='',consentIso='',busy=false;
@@ -415,7 +416,7 @@ function pickedRes(){return RES.filter(function(r){return !r.done&&sel[r.id]})}
 function renderRes(){
   var allDone=RES.length&&RES.every(function(r){return r.done});
   $('res').innerHTML=RES.map(function(r){
-    var title=/^(데크|파쇄석)\d$/.test(r.site)?siteShort(r.site)+' 사이트 ('+r.site+')':r.site+'번 사이트';
+    var title=siteName(r.site)+' 사이트';
     var sub=fmt(r.from)+' ~ '+fmt(r.to)+' · '+r.nights+'박';
     return '<label class="rc'+(r.done?' off':'')+'"><input type="checkbox" class="rk" data-s="'+r.id+'" '+(r.done?'disabled':(sel[r.id]?'checked':''))+' aria-label="'+title+' 체크인"><span class="rb2"><b>'+title+'</b><span class="rd">'+sub+'</span>'+(r.done?'<span class="rd">이미 체크인하셨어요.</span>':'')+'</span></label>';
   }).join('')+(allDone?'<p class="lead" style="margin-top:6px">오늘 입실하는 예약은 모두 체크인을 마치셨어요.</p>':'');
@@ -441,7 +442,7 @@ function zoom(cx,cy,s){
   stage.style.setProperty('--s',s);
   stage.style.transform='translate('+tx+'px,'+ty+'px) scale('+s+')';
 }
-function mine(){return picked().map(function(x){return 'me'+x})}
+function mine(){return picked().map(function(x){return 'me'+siteShort(x)})}
 function marks(vis,on,hide){
   vis=vis.concat(mine());
   document.querySelectorAll('.mk').forEach(function(e){
