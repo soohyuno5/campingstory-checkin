@@ -194,6 +194,17 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid
 .sk-final[data-s="3"] .cta{box-shadow:none}
 .sk-final[data-s="3"] .eyebrow{color:#e3ecdd}
 body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:none;min-height:100dvh}
+/* 7번째 화면(그 밖에 확인해 주세요)은 스크롤 없이 한 화면에 다 보이게 */
+#s6 h1{font-size:34px;margin-bottom:14px}
+#s6 .tiles{grid-template-columns:repeat(4,1fr);gap:12px}
+#s6 .tile{padding:16px 16px}
+#s6 .tile small{font-size:15px}
+#s6 .tile b{font-size:22px;margin-bottom:4px}
+#s6 .tile p{font-size:17px;line-height:1.5}
+#s6 .note2{margin:14px 0 10px;padding:4px;font-size:19px}
+#s6 .more{padding:2px 20px}
+#s6 .err{min-height:0;margin:6px 0 0}
+@media (max-width:1000px){#s6 .tiles{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:760px){.main{flex-wrap:wrap;padding:20px}.mapcol{position:static;width:min(100%,340px);margin-inline:auto}h1{font-size:30px}.cta{padding-inline:20px}.tiles{grid-template-columns:1fr}.big1{font-size:44px}}
 @media (prefers-reduced-motion:reduce){.stage{transition:none}.step.show{animation:none}.mk.pop,.lab,.arw,.arf,.arm{animation:none}.bar i{transition:none}}
 </style>
@@ -284,8 +295,7 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 
       <section class="step center" id="s6">
         <h1>그 밖에 확인해 주세요</h1>
-        <p class="lead" style="margin-bottom:20px">체크인 전에 한 번만 읽어 주세요.</p>
-        <div class="tiles">
+                <div class="tiles">
           <div class="tile"><small>퇴실</small><b>11:00까지예요</b><p>늦은 퇴실은 다음 예약이 없고 미리 확인된 경우에만 15:00까지 가능하고, 20,000원이 추가돼요.</p></div>
           <div class="tile"><small>화로·불</small><b>텐트 안에서는 사용 금지</b><p>재는 완전히 식은 뒤 버리고, 화로와 재그릇은 야외 개수대에서 씻어 주세요. 재는 옆 재통에 버려 주세요.</p></div>
           <div class="tile"><small>전기</small><b>사이트당 600W까지</b><p>전기히터, 전기밥솥, 에어컨처럼 600W를 넘는 기기는 사용할 수 없어요.</p></div>
