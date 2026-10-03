@@ -234,8 +234,8 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
         <h1>체크인을 시작할게요</h1>
         <p class="lead">예약하신 분의 성함과 전화번호 뒤 4자리를 입력해 주세요.</p>
         <div class="field">
-          <input type="text" id="nm" placeholder="성함" autocomplete="off" aria-label="예약자 성함">
-          <input type="text" id="ph" placeholder="전화번호 뒤 4자리" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="4" aria-label="전화번호 뒤 4자리">
+          <input type="text" id="nm" placeholder="성함" lang="ko" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next" aria-label="예약자 성함">
+          <input type="text" id="ph" placeholder="전화번호 뒤 4자리" inputmode="numeric" pattern="[0-9]*" autocomplete="off" enterkeyhint="go" maxlength="4" aria-label="전화번호 뒤 4자리">
         </div>
         <p class="err" id="err"></p>
         <button class="rulebtn" id="rulesBtn" type="button"><span>운영수칙 보기</span><span>›</span></button>
@@ -391,7 +391,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261002-213609';
+var BUILD='20261003-100415';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
@@ -562,6 +562,8 @@ $('help').onclick=function(){$('helpSheet').hidden=false};
 $('helpClose').onclick=function(){$('helpSheet').hidden=true};
 $('helpSheet').onclick=function(e){if(e.target===this)this.hidden=true};
 $('rulesBtn').onclick=openRules;
+$('nm').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();$('ph').focus()}});
+$('ph').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();$('next').click()}});
 ['pointerdown','keydown','input','touchstart'].forEach(function(ev){document.addEventListener(ev,function(){arm()},true)});
 window.addEventListener('resize',function(){if(i==2&&cur){pick(cur)}});
 /* 새 버전이 올라오면 처음 화면에서 알아서 새로 고침한다 (태블릿에서 캐시를 지우지 않아도 되게) */
