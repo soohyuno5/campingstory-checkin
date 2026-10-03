@@ -205,6 +205,45 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 #s6 .note2{margin:14px 0 10px;padding:4px;font-size:19px}
 #s6 .more{padding:2px 20px}
 #s6 .err{min-height:0;margin:6px 0 0}
+/* 4~6번째 화면: 항목마다 빈 체크박스 */
+.rcard li.has-ck::before{display:none}
+.rcard li.has-ck{padding:6px 0;min-height:0;margin-bottom:6px}
+.rcard li.loud.has-ck{padding:12px 16px}
+.ck{display:flex;gap:16px;align-items:flex-start;cursor:pointer;width:100%}
+.loud .ck{align-items:center;justify-content:center}
+.ck .rk2{flex:none;width:32px;height:32px;margin:4px 0 0;accent-color:var(--pine);cursor:pointer}
+.loud .ck .rk2{margin:0}
+.ckt{flex:1;min-width:0}
+.rcard .ckerr{margin:8px 0 0;min-height:0}
+#s1 h1,#s2 h1{font-size:34px;margin-bottom:6px}
+#s1 .lead{font-size:20px;margin-bottom:14px}
+#s1 .rc{padding:12px 18px;margin-bottom:8px}
+#s1 .rb2 b{font-size:25px}
+#s1 .rd{font-size:17px}
+#s2 .lead{font-size:19px;margin-bottom:10px}
+#s2 .fb{min-height:64px;padding:6px 6px;font-size:17px;gap:2px}
+#s2 .fb .em{font-size:26px}
+#s2 .fdesc{margin-top:8px;padding:10px 18px;font-size:18px;line-height:1.45}
+#s2 .fdesc b{font-size:23px}
+#s2 .fdesc .ln{margin-top:3px}
+#s2 .fdesc .loud2{padding:6px 12px;margin:6px 0 2px}
+#s3.center,#s4.center,#s5.center{max-width:1040px}
+#s3 h1,#s4 h1,#s5 h1{font-size:34px;margin-bottom:12px}
+#s3 .eyebrow,#s4 .eyebrow,#s5 .eyebrow{margin-bottom:8px}
+#s3 .rcard,#s4 .rcard,#s5 .rcard{padding:18px 28px}
+#s3 .rcard ul,#s4 .rcard ul,#s5 .rcard ul{font-size:24px;line-height:1.5}
+#s3 .rcard li.has-ck,#s4 .rcard li.has-ck,#s5 .rcard li.has-ck{padding:5px 0;margin-bottom:4px}
+.go.dim{opacity:.45}
+/* 첫 화면: 여백은 줄이고 제목은 크게 */
+.main:has(#s0.show){padding-top:14px}
+#s0.center{max-width:900px}
+#s0>div:first-child{margin-bottom:6px}
+#s0 .logo.big{height:50px}
+#s0 h1{font-size:62px;line-height:1.12;margin:0 0 8px}
+#s0 .lead{font-size:24px;margin:0 0 18px}
+#s0 .field input{height:78px;font-size:30px}
+#s0 .err{min-height:20px;margin-top:6px}
+#s0 .rulebtn{margin-top:12px;height:70px;font-size:24px;max-width:none}
 @media (max-width:760px){.main{flex-wrap:wrap;padding:20px}.mapcol{position:static;width:min(100%,340px);margin-inline:auto}h1{font-size:30px}.cta{padding-inline:20px}.tiles{grid-template-columns:1fr}.big1{font-size:44px}}
 @media (prefers-reduced-motion:reduce){.stage{transition:none}.step.show{animation:none}.mk.pop,.lab,.arw,.arf,.arm{animation:none}.bar i{transition:none}}
 </style>
@@ -391,7 +430,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261003-100415';
+var BUILD='20261003-101545';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
@@ -421,7 +460,7 @@ function renderRes(){
     var sub=fmt(r.from)+' ~ '+fmt(r.to)+' · '+r.nights+'박';
     return '<label class="rc'+(r.done?' off':'')+'"><input type="checkbox" class="rk" data-s="'+r.id+'" '+(r.done?'disabled':(sel[r.id]?'checked':''))+' aria-label="'+title+' 체크인"><span class="rb2"><b>'+title+'</b><span class="rd">'+sub+'</span>'+(r.done?'<span class="rd">이미 체크인하셨어요.</span>':'')+'</span></label>';
   }).join('')+(allDone?'<p class="lead" style="margin-top:6px">오늘 입실하는 예약은 모두 체크인을 마치셨어요.</p>':'');
-  document.querySelectorAll('.rk').forEach(function(c){c.onchange=function(){sel[c.getAttribute('data-s')]=c.checked}});
+  document.querySelectorAll('.rk').forEach(function(c){c.onchange=function(){sel[c.getAttribute('data-s')]=c.checked;$('rerr').textContent='';updateCta()}});
 }
 var stage=document.getElementById('stage'),vp=document.getElementById('vp'),ov=document.getElementById('ov');
 function byId(id){return F.filter(function(x){return x.id==id})[0]}
@@ -479,7 +518,7 @@ function overview(){
   marks([],null);arrows();zoom(W/2,H/2,1);
 }
 var EN=['WELCOME','YOUR RESERVATION','FACILITIES','HOUSE RULES  I','HOUSE RULES  II','HOUSE RULES  III','GOOD TO KNOW','ENJOY YOUR STAY'];
-var CTA=['조회하기','확인했어요','다음','확인했어요','확인했어요','확인했어요','체크인 완료','처음으로'];
+var CTA=['조회하기','확인했어요','다음','동의','동의','동의','체크인 완료','처음으로'];
 var DONE_NAMES=[];
 var viewRules=false,idleT,warnT,doneTimer,doneCnt=0,IDLE=90000;
 function $(id){return document.getElementById(id)}
@@ -493,13 +532,13 @@ function arm(){
   idleT=setTimeout(resetAll,IDLE);
 }
 function resetAll(){
-  $('helpSheet').hidden=true;stopDone();viewRules=false;i=0;cur=null;sel={};RES=[];lookupName='';lookupL4='';consentIso='';busy=false;
+  $('helpSheet').hidden=true;document.querySelectorAll('.rk2').forEach(function(c){c.checked=false});document.querySelectorAll('.ckerr').forEach(function(e){e.textContent=''});stopDone();viewRules=false;i=0;cur=null;sel={};RES=[];lookupName='';lookupL4='';consentIso='';busy=false;
   $('nm').value='';$('ph').value='';$('err').textContent='';$('rerr').textContent='';$('cerr').textContent='';
   show();setTimeout(checkUpdate,500);
 }
 function openRules(){
   var h=['s3','s4','s5','s6'].map(function(id){return $(id).innerHTML}).join('');
-  h=h.replace(/<span class="eyebrow">[^<]*<\/span>/g,'').replace(' id="petTile" hidden','').replace('<p class="lead" style="margin-bottom:20px">체크인 전에 한 번만 읽어 주세요.</p>','');
+  h=h.replace(/<p class="err ckerr"><\/p>/g,'').replace(/<label class="ck"><input type="checkbox" class="rk2">/g,'<span class="ck0">').replace(/<\/label>/g,'</span>').replace(/ has-ck/g,'').replace(/<span class="eyebrow">[^<]*<\/span>/g,'').replace(' id="petTile" hidden','').replace('<p class="lead" style="margin-bottom:20px">체크인 전에 한 번만 읽어 주세요.</p>','');
   $('sr').innerHTML='<h1 class="rvt">운영수칙</h1><p class="lead">체크인 때 보신 내용을 다시 확인할 수 있어요.</p>'+h;
   viewRules=true;show();
 }
@@ -522,7 +561,28 @@ function show(){
   $('next').textContent=viewRules?'닫기':CTA[i];
   if(i==7&&!viewRules)startDone();else stopDone();
   window.scrollTo&&document.querySelector('.app').scrollIntoView({block:'nearest'});
+  updateCta();
   arm();
+}
+function initChecks(){
+  ['s3','s4','s5'].forEach(function(id){
+    var card=document.querySelector('#'+id+' .rcard');
+    card.querySelectorAll('li').forEach(function(li){
+      li.classList.add('has-ck');
+      li.innerHTML='<label class="ck"><input type="checkbox" class="rk2"><span class="ckt">'+li.innerHTML+'</span></label>';
+    });
+    card.insertAdjacentHTML('afterend','<p class="err ckerr"></p>');
+    card.querySelectorAll('.rk2').forEach(function(c){c.onchange=function(){var e=document.querySelector('#'+id+' .ckerr');if(allChecked(id))e.textContent='';updateCta()}});
+  });
+}
+function allChecked(id){var l=document.querySelectorAll('#'+id+' .rk2');for(var k=0;k<l.length;k++)if(!l[k].checked)return false;return true}
+function updateCta(){
+  var dim=false;
+  if(!viewRules){
+    if(i==1)dim=!picked().length;
+    else if(i>=3&&i<=5)dim=!allChecked('s'+i);
+  }
+  $('next').classList.toggle('dim',dim);
 }
 function setBusy(on,label){busy=on;$('next').disabled=on;$('next').textContent=on?label:(viewRules?'닫기':CTA[i])}
 var STEPN=['조회','예약 확인','시설 안내','수칙 1','수칙 2','수칙 3','안내 확인','완료'];
@@ -538,11 +598,14 @@ $('next').onclick=function(){
       if(!res||!res.ok){
         e.textContent=res&&res.code=='LOCK'?'잠시 후에 다시 해 주세요. 관리자 호출 버튼을 눌러 주세요.':res&&res.code=='BADKEY'?'이 태블릿은 아직 연결되지 않았어요. 관리자 호출 버튼을 눌러 주세요.':'조회하지 못했어요. 다시 해 보시거나 관리자 호출 버튼을 눌러 주세요.';return}
       if(!res.items.length){e.textContent='예약을 찾지 못했어요. 성함과 전화번호 뒤 4자리를 다시 확인해 주세요. 계속 안 되면 관리자 호출 버튼을 눌러 주세요.';return}
-      RES=res.items;sel={};RES.forEach(function(r){if(!r.done)sel[r.id]=true});lookupName=nm;lookupL4=l4;i=1;show();
+      RES=res.items;sel={};lookupName=nm;lookupL4=l4;i=1;show();
     }).catch(function(){setBusy(false);e.textContent='연결이 잘 안 돼요. 잠시 후 다시 해 보시거나 관리자 호출 버튼을 눌러 주세요.'});
     return;
   }
-  if(i==1){if(!picked().length){$('rerr').textContent=RES.length&&RES.every(function(r){return r.done})?'오늘 체크인할 사이트가 더 없어요.':'체크인할 사이트를 한 곳 이상 선택해 주세요.';return}$('rerr').textContent=''}
+  if(i==1){if(!picked().length){$('rerr').textContent=RES.length&&RES.every(function(r){return r.done})?'오늘 체크인할 사이트가 더 없어요.':'체크인할 사이트에 체크해 주세요.';return}$('rerr').textContent=''}
+  if(i>=3&&i<=5){
+    if(!allChecked('s'+i)){document.querySelector('#s'+i+' .ckerr').textContent='모든 항목에 체크해 주세요.';updateCta();return}
+  }
   if(i==5){consentIso=new Date().toISOString()}
   if(i==6){
     setBusy(true,'기록하는 중…');$('cerr').textContent='';
@@ -574,7 +637,7 @@ function checkUpdate(){
   }).catch(function(){});
 }
 setInterval(checkUpdate,300000);
-build();show();checkUpdate();
+initChecks();build();show();checkUpdate();
 </script>
 
 </body>
