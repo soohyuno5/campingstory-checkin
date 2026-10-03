@@ -178,6 +178,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid
 .phone{font-size:52px;font-weight:700;letter-spacing:.03em;color:var(--pine);user-select:all;margin-bottom:26px;font-variant-numeric:tabular-nums}
 .shclose{height:64px;width:100%;border:0;border-radius:16px;background:var(--pine);color:var(--pine-ink);font:inherit;font-size:22px;font-weight:700;cursor:pointer}
 .rulebtn{margin-top:26px;width:100%;max-width:520px;height:64px;border:0;border-radius:16px;background:var(--pine-soft);color:var(--pine);font:inherit;font-size:21px;font-weight:700;display:flex;justify-content:space-between;align-items:center;padding:0 24px;cursor:pointer}
+.ver{margin:18px 0 0;font-size:14px;color:var(--ink2);opacity:.7}
 .idle[hidden]{display:none}
 .idle{background:#fff3cd;color:#6b4e00;text-align:center;font-weight:700;font-size:17px;padding:10px 16px}
 #sr h1{font-size:32px;margin-top:38px}
@@ -278,6 +279,7 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
         </div>
         <p class="err" id="err"></p>
         <button class="rulebtn" id="rulesBtn" type="button"><span>운영수칙 보기</span><span>›</span></button>
+        <p class="ver" id="ver"></p>
       </section>
 
       <section class="step center" id="sr"></section>
@@ -430,7 +432,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261003-101545';
+var BUILD='20261003-102715';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
@@ -638,6 +640,7 @@ function checkUpdate(){
 }
 setInterval(checkUpdate,300000);
 initChecks();build();show();checkUpdate();
+if(/^\d{8}-\d{6}$/.test(BUILD))$('ver').textContent='화면 버전 '+BUILD.slice(4,8)+'-'+BUILD.slice(9,13);
 </script>
 
 </body>
