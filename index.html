@@ -254,6 +254,11 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 @keyframes nudgeD{0%,100%{transform:translate(0,0)}50%{transform:translate(12px,12px)}}
 .usebtn{height:68px;border:0;border-radius:20px;background:#f2f4f6;color:#3182f6;font:inherit;font-size:23px;font-weight:700;display:flex;justify-content:space-between;align-items:center;padding:0 24px;cursor:pointer}
 @media (prefers-reduced-motion:reduce){.parrow2{animation:none}}
+/* 첫 화면: 입력칸 아래 '내 예약 확인하기' */
+.gobtn{margin-top:14px;width:100%;height:78px;border:0;border-radius:20px;background:var(--pine);color:var(--pine-ink);font:inherit;font-size:30px;font-weight:700;cursor:pointer}
+.gobtn:disabled{opacity:.6}
+.gobtn:active{transform:scale(.99)}
+.cta[hidden]{display:none}
 /* 매점 이용 안내 창 (토스풍) */
 .tosscard{background:#f2f4f6;color:#191f28;text-align:left;max-width:680px;padding:20px 22px 18px;display:flex;flex-direction:column;gap:8px}
 .tosscard .th b{font-size:30px;font-weight:700;letter-spacing:-.01em;padding:0 4px}
@@ -274,7 +279,12 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 .tp2 .tp b{font-size:24px}
 .tp2 .tp b.acct{font-size:22px}
 .tp2 .tp small{font-size:15px}
-.tosscard{max-width:760px}
+.tosscard{max-width:940px}
+.tsteps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tsteps .tr{flex-direction:column;align-items:center;text-align:center;gap:10px;padding:16px 10px 14px}
+.tsteps .tn{width:40px;height:40px;font-size:21px}
+.tsteps .tt{flex:none;font-size:21px;line-height:1.3;min-height:56px;display:flex;align-items:center}
+.tsteps .tr svg.dev{width:118px;height:155px;margin:0;filter:drop-shadow(0 4px 6px rgba(0,0,0,.2))}
 .tosscard .tclose{background:#3182f6;color:#fff;margin-top:6px}
 /* 첫 화면: 여백은 줄이고 제목은 크게 */
 .main:has(#s0.show){padding-top:14px}
@@ -285,7 +295,7 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 #s0 .lead{font-size:24px;margin:0 0 12px}
 #s0 .field input{height:74px;font-size:30px}
 #s0 .err{min-height:20px;margin-top:6px}
-#s0 .rulebtn{margin-top:12px;height:70px;font-size:24px;max-width:none}
+#s0 .rulebtn{margin-top:10px;height:64px;font-size:22px;max-width:none}
 @media (max-width:760px){.main{flex-wrap:wrap;padding:20px}.mapcol{position:static;width:min(100%,340px);margin-inline:auto}h1{font-size:30px}.cta{padding-inline:20px}.tiles{grid-template-columns:1fr}.big1{font-size:44px}}
 @media (prefers-reduced-motion:reduce){.stage{transition:none}.step.show{animation:none}.mk.pop,.mk.me:not(.off),.lab,.arw,.arf,.arm,.payhint .parrow{animation:none}.bar i{transition:none}}
 </style>
@@ -303,7 +313,7 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
     <div class="phone">010-5073-9214</div>
     <button class="shclose" id="helpClose" type="button">닫기</button>
   </div></div>
-  <div class="sheet" id="storeSheet" hidden><div class="shcard tosscard" role="dialog" aria-label="매점 이용 안내"><div class="th"><b>매점 이용 안내</b></div><div class="tr"><span class="tn">1</span><span class="tt">상품을 골라 주세요</span><svg class="dev" viewBox="0 0 64 84" aria-hidden="true"><rect x="1" y="1" width="62" height="82" rx="9" fill="#2b2f36"/><rect x="5" y="5" width="54" height="66" rx="5" fill="#f4f6f8"/><text x="32" y="79" text-anchor="middle" font-size="6" font-weight="700" fill="#8b95a1" font-family="sans-serif">toss</text><rect x="9" y="10" width="22" height="26" rx="4" fill="#ffe7a8" stroke="#3182f6" stroke-width="2"/><circle cx="27" cy="14" r="3.2" fill="#3182f6"/><rect x="33" y="10" width="22" height="26" rx="4" fill="#cfe8ff"/><rect x="9" y="40" width="22" height="26" rx="4" fill="#ffd6d6"/><rect x="33" y="40" width="22" height="26" rx="4" fill="#d8f0d4"/></svg></div><div class="tr"><span class="tn">2</span><span class="tt">상품과 수량을 확인하세요</span><svg class="dev" viewBox="0 0 64 84" aria-hidden="true"><rect x="1" y="1" width="62" height="82" rx="9" fill="#2b2f36"/><rect x="5" y="5" width="54" height="66" rx="5" fill="#f4f6f8"/><text x="32" y="79" text-anchor="middle" font-size="6" font-weight="700" fill="#8b95a1" font-family="sans-serif">toss</text><rect x="9" y="10" width="17" height="21" rx="3" fill="#f5b53d"/><rect x="29" y="12" width="26" height="4" rx="2" fill="#cdd3da"/><text x="29" y="26" font-size="7" font-weight="700" fill="#191f28" font-family="sans-serif">3,000원</text><rect x="8" y="35" width="48" height="14" rx="7" fill="#e5e8eb"/><text x="32" y="45" text-anchor="middle" font-size="8" font-weight="700" fill="#4e5968" font-family="sans-serif">−   1   +</text><text x="9" y="62" font-size="5.5" fill="#6b7684" font-family="sans-serif">총 금액</text><text x="55" y="62" text-anchor="end" font-size="6.5" font-weight="700" fill="#191f28" font-family="sans-serif">3,000원</text></svg></div><div class="tr"><span class="tn">3</span><span class="tt">결제수단을 선택해 결제하세요</span><svg class="dev" viewBox="0 0 64 84" aria-hidden="true"><rect x="1" y="1" width="62" height="82" rx="9" fill="#2b2f36"/><rect x="5" y="5" width="54" height="66" rx="5" fill="#f4f6f8"/><text x="32" y="79" text-anchor="middle" font-size="6" font-weight="700" fill="#8b95a1" font-family="sans-serif">toss</text><rect x="8" y="12" width="48" height="24" rx="6" fill="#3182f6"/><rect x="12" y="19" width="11" height="8" rx="1.5" fill="#fff"/><rect x="12" y="21" width="11" height="2" fill="#3182f6"/><text x="40" y="27" text-anchor="middle" font-size="5.5" font-weight="700" fill="#fff" font-family="sans-serif">카드로 결제</text><rect x="8" y="41" width="48" height="24" rx="6" fill="#e5e8eb"/><rect x="12" y="48" width="4" height="4" fill="#4e5968"/><rect x="17" y="48" width="4" height="4" fill="#4e5968"/><rect x="12" y="53" width="4" height="4" fill="#4e5968"/><rect x="18" y="54" width="3" height="3" fill="#4e5968"/><text x="40" y="56" text-anchor="middle" font-size="5.5" font-weight="700" fill="#4e5968" font-family="sans-serif">QR로 결제</text></svg></div><div class="tp2"><div class="tp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="#3182f6"/></svg><span><small>현금·계좌이체로 결제하시나요?</small><b>010-5073-9214</b></span></div><div class="tp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7v2h20V7L12 2zm-8 9v7h3v-7H4zm6.5 0v7h3v-7h-3zM17 11v7h3v-7h-3zM2 20v2h20v-2H2z" fill="#3182f6"/></svg><span><small>계좌번호</small><b class="acct">수협 0000-0000-4389</b></span></div></div><button class="shclose tclose" id="storeClose" type="button">닫기</button></div></div>
+  <div class="sheet" id="storeSheet" hidden><div class="shcard tosscard" role="dialog" aria-label="매점 이용 안내"><div class="th"><b>매점 이용 안내</b></div><div class="tsteps"><div class="tr"><span class="tn">1</span><span class="tt">상품을 골라 주세요</span><svg class="dev" viewBox="0 0 64 84" aria-hidden="true"><rect x="1" y="1" width="62" height="82" rx="9" fill="#2b2f36"/><rect x="5" y="5" width="54" height="66" rx="5" fill="#f4f6f8"/><text x="32" y="79" text-anchor="middle" font-size="6" font-weight="700" fill="#8b95a1" font-family="sans-serif">toss</text><rect x="9" y="10" width="22" height="26" rx="4" fill="#ffe7a8" stroke="#3182f6" stroke-width="2"/><circle cx="27" cy="14" r="3.2" fill="#3182f6"/><rect x="33" y="10" width="22" height="26" rx="4" fill="#cfe8ff"/><rect x="9" y="40" width="22" height="26" rx="4" fill="#ffd6d6"/><rect x="33" y="40" width="22" height="26" rx="4" fill="#d8f0d4"/></svg></div><div class="tr"><span class="tn">2</span><span class="tt">상품과 수량을 확인하세요</span><svg class="dev" viewBox="0 0 64 84" aria-hidden="true"><rect x="1" y="1" width="62" height="82" rx="9" fill="#2b2f36"/><rect x="5" y="5" width="54" height="66" rx="5" fill="#f4f6f8"/><text x="32" y="79" text-anchor="middle" font-size="6" font-weight="700" fill="#8b95a1" font-family="sans-serif">toss</text><rect x="9" y="10" width="17" height="21" rx="3" fill="#f5b53d"/><rect x="29" y="12" width="26" height="4" rx="2" fill="#cdd3da"/><text x="29" y="26" font-size="7" font-weight="700" fill="#191f28" font-family="sans-serif">3,000원</text><rect x="8" y="35" width="48" height="14" rx="7" fill="#e5e8eb"/><text x="32" y="45" text-anchor="middle" font-size="8" font-weight="700" fill="#4e5968" font-family="sans-serif">−   1   +</text><text x="9" y="62" font-size="5.5" fill="#6b7684" font-family="sans-serif">총 금액</text><text x="55" y="62" text-anchor="end" font-size="6.5" font-weight="700" fill="#191f28" font-family="sans-serif">3,000원</text></svg></div><div class="tr"><span class="tn">3</span><span class="tt">결제수단을 선택해 결제하세요</span><svg class="dev" viewBox="0 0 64 84" aria-hidden="true"><rect x="1" y="1" width="62" height="82" rx="9" fill="#2b2f36"/><rect x="5" y="5" width="54" height="66" rx="5" fill="#f4f6f8"/><text x="32" y="79" text-anchor="middle" font-size="6" font-weight="700" fill="#8b95a1" font-family="sans-serif">toss</text><rect x="8" y="12" width="48" height="24" rx="6" fill="#3182f6"/><rect x="12" y="19" width="11" height="8" rx="1.5" fill="#fff"/><rect x="12" y="21" width="11" height="2" fill="#3182f6"/><text x="40" y="27" text-anchor="middle" font-size="5.5" font-weight="700" fill="#fff" font-family="sans-serif">카드로 결제</text><rect x="8" y="41" width="48" height="24" rx="6" fill="#e5e8eb"/><rect x="12" y="48" width="4" height="4" fill="#4e5968"/><rect x="17" y="48" width="4" height="4" fill="#4e5968"/><rect x="12" y="53" width="4" height="4" fill="#4e5968"/><rect x="18" y="54" width="3" height="3" fill="#4e5968"/><text x="40" y="56" text-anchor="middle" font-size="5.5" font-weight="700" fill="#4e5968" font-family="sans-serif">QR로 결제</text></svg></div></div><div class="tp2"><div class="tp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="#3182f6"/></svg><span><small>현금·계좌이체로 결제하시나요?</small><b>010-5073-9214</b></span></div><div class="tp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7v2h20V7L12 2zm-8 9v7h3v-7H4zm6.5 0v7h3v-7h-3zM17 11v7h3v-7h-3zM2 20v2h20v-2H2z" fill="#3182f6"/></svg><span><small>계좌번호</small><b class="acct">수협 0000-0000-4389</b></span></div></div><button class="shclose tclose" id="storeClose" type="button">닫기</button></div></div>
   <div class="bar"><i id="bar"></i></div>
   <div class="idle" id="idle" hidden>계속 이용하시려면 화면을 눌러 주세요. 15초 뒤에 처음 화면으로 돌아가요.</div>
   <div class="segs" id="segs"></div>
@@ -320,6 +330,7 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
           <input type="text" id="ph" placeholder="전화번호 뒤 4자리" inputmode="numeric" pattern="[0-9]*" autocomplete="off" enterkeyhint="go" maxlength="4" aria-label="전화번호 뒤 4자리">
         </div>
         <p class="err" id="err"></p>
+        <button class="gobtn" id="goBtn" type="button">내 예약 확인하기</button>
         <button class="rulebtn" id="rulesBtn" type="button"><span>운영수칙 보기</span><span>›</span></button>
         <p class="ver" id="ver"></p>
       </div><aside class="s0r" aria-label="매점 결제 안내"><div class="gcard"><svg class="pos2" viewBox="0 0 60 96" aria-hidden="true" focusable="false"><rect x="4" y="2" width="52" height="92" rx="11" fill="#f3f1ea" stroke="#cfc9bb" stroke-width="2"/><rect x="10" y="9" width="40" height="58" rx="6" fill="#ffffff"/><path d="M30 14l8 12h-4l6 9h-5l5 8H20l5-8h-5l6-9h-4z" fill="#40573c"/><rect x="14" y="50" width="32" height="12" rx="6" fill="#2f7bff"/><text x="30" y="59" text-anchor="middle" font-size="7" font-weight="700" fill="#fff" font-family="sans-serif">결제하기</text><rect x="17" y="78" width="26" height="6" rx="3" fill="#d9d4c7"/></svg><b>매점 결제는<br>오른쪽 아래<br>단말기에서<br>해 주세요</b><span class="parrow2" aria-hidden="true">↘</span></div><button class="usebtn" id="storeBtn" type="button"><span>매점 이용 방법</span><span>›</span></button></aside></div></section>
@@ -474,7 +485,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261003-212822';
+var BUILD='20261003-213445';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
@@ -489,11 +500,13 @@ function siteName(s){var k=siteShort(s);return /^B\d$/.test(k)?k:k+'번'}
 var DOW=['일','월','화','수','목','금','토'];
 function fmt(ymd){var p=String(ymd).split('-');if(p.length<3)return ymd;var d=new Date(+p[0],+p[1]-1,+p[2]);return (+p[1])+'월 '+(+p[2])+'일('+DOW[d.getDay()]+')'}
 var RES=[],sel={},lookupName='',lookupL4='',consentIso='',busy=false;
-function api(fn,args){
+function api1(fn,args){
   var ctl=('AbortController' in window)?new AbortController():null;
-  var t=setTimeout(function(){ctl&&ctl.abort()},15000);
+  var t=setTimeout(function(){ctl&&ctl.abort()},12000);
   return fetch(API+'?fn='+fn+'&k='+encodeURIComponent(KEY)+'&a='+encodeURIComponent(JSON.stringify(args||[])),ctl?{signal:ctl.signal}:{}).then(function(r){clearTimeout(t);return r.json()}).catch(function(e){clearTimeout(t);throw e});
 }
+/* 구글 서버가 가끔 느리거나 404를 줘서, 실패하면 한 번 더 시도한다 (조회·체크인 모두 여러 번 보내도 안전) */
+function api(fn,args){return api1(fn,args).catch(function(){return api1(fn,args)})}
 function picked(){return RES.filter(function(r){return !r.done&&sel[r.id]}).map(function(r){return r.site})}
 function pickedIds(){return RES.filter(function(r){return !r.done&&sel[r.id]}).map(function(r){return r.id})}
 function pickedRes(){return RES.filter(function(r){return !r.done&&sel[r.id]})}
@@ -602,6 +615,7 @@ function show(){
   $('mapcol').hidden=(viewRules||i!=2);
   if(i==2&&!viewRules){if(cur)pick(cur);else overview()}
   $('back').style.visibility=(viewRules||i==0||i==N-1)?'hidden':'visible';
+  document.querySelector('.cta').hidden=(i==0&&!viewRules);
   $('next').textContent=viewRules?'닫기':CTA[i];
   if(i==7&&!viewRules)startDone();else stopDone();
   window.scrollTo&&document.querySelector('.app').scrollIntoView({block:'nearest'});
@@ -628,7 +642,7 @@ function updateCta(){
   }
   $('next').classList.toggle('dim',dim);
 }
-function setBusy(on,label){busy=on;$('next').disabled=on;$('next').textContent=on?label:(viewRules?'닫기':CTA[i])}
+function setBusy(on,label){busy=on;$('next').disabled=on;$('next').textContent=on?label:(viewRules?'닫기':CTA[i]);$('goBtn').disabled=on;$('goBtn').textContent=on?label:'내 예약 확인하기'}
 var STEPN=['조회','예약 확인','시설 안내','수칙 1','수칙 2','수칙 3','안내 확인','완료'];
 $('next').onclick=function(){
   if(busy)return;
@@ -672,6 +686,7 @@ $('storeClose').onclick=function(){$('storeSheet').hidden=true};
 $('storeSheet').onclick=function(e){if(e.target===this)this.hidden=true};
 $('helpSheet').onclick=function(e){if(e.target===this)this.hidden=true};
 $('rulesBtn').onclick=openRules;
+$('goBtn').onclick=function(){$('next').click()};
 $('nm').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();$('ph').focus()}});
 $('ph').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();$('next').click()}});
 ['pointerdown','keydown','input','touchstart'].forEach(function(ev){document.addEventListener(ev,function(){arm()},true)});
