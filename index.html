@@ -255,7 +255,7 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 .usebtn{height:62px;border:0;border-radius:20px;background:#f2f4f6;color:#3182f6;font:inherit;font-size:21px;font-weight:700;display:flex;justify-content:space-between;align-items:center;padding:0 24px;cursor:pointer}
 @media (prefers-reduced-motion:reduce){.parrow2{animation:none}}
 /* 첫 화면: 입력칸 아래 '내 예약 확인하기' */
-.gobtn{margin-top:14px;width:100%;height:78px;border:0;border-radius:20px;background:var(--pine);color:var(--pine-ink);font:inherit;font-size:30px;font-weight:700;cursor:pointer}
+.gobtn{margin-top:18px;width:100%;height:88px;border:0;border-radius:20px;background:var(--pine);color:var(--pine-ink);font:inherit;font-size:30px;font-weight:700;cursor:pointer}
 .gobtn:disabled{opacity:.6}
 .gobtn:active{transform:scale(.99)}
 .cta[hidden]{display:none}
@@ -287,15 +287,15 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 .tsteps .tr svg.dev{width:118px;height:155px;margin:0;filter:drop-shadow(0 4px 6px rgba(0,0,0,.2))}
 .tosscard .tclose{background:#3182f6;color:#fff;margin-top:6px}
 /* 첫 화면: 여백은 줄이고 제목은 크게 */
-.main:has(#s0.show){padding-top:14px}
+.main:has(#s0.show){padding-top:30px}
 #s0.center{max-width:1200px}
 #s0>div:first-child{margin-bottom:6px}
 #s0 .logo.big{height:50px}
-#s0 h1{font-size:62px;line-height:1.12;margin:0 0 8px}
+#s0 h1{font-size:66px;line-height:1.12;margin:0 0 10px}
 #s0 .lead{font-size:24px;margin:0 0 12px}
-#s0 .field input{height:74px;font-size:30px}
+#s0 .field input{height:82px;font-size:30px}
 #s0 .err{min-height:20px;margin-top:6px}
-#s0 .rulebtn{margin-top:10px;height:64px;font-size:22px;max-width:none}
+#s0 .rulebtn{margin-top:12px;height:68px;font-size:22px;max-width:none}
 @media (max-width:760px){.main{flex-wrap:wrap;padding:20px}.mapcol{position:static;width:min(100%,340px);margin-inline:auto}h1{font-size:30px}.cta{padding-inline:20px}.tiles{grid-template-columns:1fr}.big1{font-size:44px}}
 @media (prefers-reduced-motion:reduce){.stage{transition:none}.step.show{animation:none}.mk.pop,.mk.me:not(.off),.lab,.arw,.arf,.arm,.payhint .parrow{animation:none}.bar i{transition:none}}
 </style>
@@ -322,7 +322,6 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
     <div class="pane">
 
       <section class="step show center" id="s0"><div class="s0g"><div class="s0l">
-        <div style="margin-bottom:22px"><img class="logo big lg-l" src="logo-color.png" alt="캠핑스토리"><img class="logo big lg-d" src="logo-white.png" alt="캠핑스토리"></div>
         <h1>체크인을 시작할게요</h1>
         <p class="lead">예약하신 분의 성함과 전화번호 뒤 4자리를 입력해 주세요.</p>
         <div class="field">
@@ -485,7 +484,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261003-213653';
+var BUILD='20261003-215302';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
