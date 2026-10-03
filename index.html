@@ -179,7 +179,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid
 .phone{font-size:52px;font-weight:700;letter-spacing:.03em;color:var(--pine);user-select:all;margin-bottom:26px;font-variant-numeric:tabular-nums}
 .shclose{height:64px;width:100%;border:0;border-radius:16px;background:var(--pine);color:var(--pine-ink);font:inherit;font-size:22px;font-weight:700;cursor:pointer}
 .rulebtn{margin-top:26px;width:100%;max-width:520px;height:64px;border:0;border-radius:16px;background:var(--pine-soft);color:var(--pine);font:inherit;font-size:21px;font-weight:700;display:flex;justify-content:space-between;align-items:center;padding:0 24px;cursor:pointer}
-.ver{margin:18px 0 0;font-size:14px;color:var(--ink2);opacity:.7}
+.ver{margin:10px 0 0;font-size:14px;color:var(--ink2);opacity:.7}
 .idle[hidden]{display:none}
 .idle{background:#fff3cd;color:#6b4e00;text-align:center;font-weight:700;font-size:17px;padding:10px 16px}
 #sr h1{font-size:32px;margin-top:38px}
@@ -236,6 +236,13 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 #s3 .rcard ul,#s4 .rcard ul,#s5 .rcard ul{font-size:24px;line-height:1.5}
 #s3 .rcard li.has-ck,#s4 .rcard li.has-ck,#s5 .rcard li.has-ck{padding:5px 0;margin-bottom:4px}
 .go.dim{opacity:.45}
+/* 첫 화면: 매점 결제는 오른쪽 단말기 안내 */
+.payhint{display:flex;align-items:center;gap:16px;background:var(--pine);color:var(--pine-ink);border-radius:18px;padding:12px 24px;margin:0 0 14px}
+.payhint .pe{font-size:34px;line-height:1}
+.payhint b{display:block;font-size:26px;font-weight:700;line-height:1.25}
+.payhint small{display:block;font-size:16px;opacity:.88}
+.payhint .parrow{margin-left:auto;font-size:44px;line-height:1;animation:nudgeR 1.1s ease-in-out infinite}
+@keyframes nudgeR{0%,100%{transform:translateX(0)}50%{transform:translateX(16px)}}
 /* 첫 화면: 여백은 줄이고 제목은 크게 */
 .main:has(#s0.show){padding-top:14px}
 #s0.center{max-width:900px}
@@ -247,7 +254,7 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 #s0 .err{min-height:20px;margin-top:6px}
 #s0 .rulebtn{margin-top:12px;height:70px;font-size:24px;max-width:none}
 @media (max-width:760px){.main{flex-wrap:wrap;padding:20px}.mapcol{position:static;width:min(100%,340px);margin-inline:auto}h1{font-size:30px}.cta{padding-inline:20px}.tiles{grid-template-columns:1fr}.big1{font-size:44px}}
-@media (prefers-reduced-motion:reduce){.stage{transition:none}.step.show{animation:none}.mk.pop,.mk.me:not(.off),.lab,.arw,.arf,.arm{animation:none}.bar i{transition:none}}
+@media (prefers-reduced-motion:reduce){.stage{transition:none}.step.show{animation:none}.mk.pop,.mk.me:not(.off),.lab,.arw,.arf,.arm,.payhint .parrow{animation:none}.bar i{transition:none}}
 </style>
 <style>[hidden]{display:none!important}html{color-scheme:light}body{margin:0}img{max-width:100%}</style>
 </head>
@@ -273,6 +280,7 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
       <section class="step show center" id="s0">
         <div style="margin-bottom:22px"><img class="logo big lg-l" src="logo-color.png" alt="캠핑스토리"><img class="logo big lg-d" src="logo-white.png" alt="캠핑스토리"></div>
         <h1>체크인을 시작할게요</h1>
+        <div class="payhint" role="note"><span class="pe" aria-hidden="true">💳</span><span class="pt"><b>매점 결제는 오른쪽 단말기에서 해 주세요</b><small>이 화면은 체크인 전용이에요</small></span><span class="parrow" aria-hidden="true">➜</span></div>
         <p class="lead">예약하신 분의 성함과 전화번호 뒤 4자리를 입력해 주세요.</p>
         <div class="field">
           <input type="text" id="nm" placeholder="성함" lang="ko" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next" aria-label="예약자 성함">
@@ -433,7 +441,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261003-103225';
+var BUILD='20261003-210550';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
