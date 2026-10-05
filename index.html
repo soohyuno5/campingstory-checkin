@@ -248,9 +248,9 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 .s0g{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,3fr);gap:28px;align-items:stretch}
 .s0r{display:flex;flex-direction:column;gap:12px;min-width:0}
 .gcard{flex:1;background:var(--pine);color:var(--pine-ink);border-radius:26px;padding:16px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center}
-.gcard .pos2{width:84px;height:134px;flex:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.28))}
-.gcard b{font-size:25px;line-height:1.3;font-weight:700}
-.parrow2{font-size:48px;line-height:1;animation:nudgeD 1.1s ease-in-out infinite}
+.gcard .pos2{width:76px;height:122px;flex:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.28))}
+.gcard b{font-size:35px;line-height:1.28;font-weight:700;letter-spacing:-.02em}
+.parrow2{font-size:54px;line-height:1;animation:nudgeD 1.1s ease-in-out infinite}
 @keyframes nudgeD{0%,100%{transform:translate(0,0)}50%{transform:translate(12px,12px)}}
 .usebtn{height:62px;border:0;border-radius:20px;background:#f2f4f6;color:#3182f6;font:inherit;font-size:21px;font-weight:700;display:flex;justify-content:space-between;align-items:center;padding:0 24px;cursor:pointer}
 @media (prefers-reduced-motion:reduce){.parrow2{animation:none}}
@@ -484,7 +484,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261003-215302';
+var BUILD='20261005-141422';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
