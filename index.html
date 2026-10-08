@@ -531,7 +531,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261008-210046';
+var BUILD='20261008-211826';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
@@ -561,7 +561,7 @@ function renderRes(){
   $('res').innerHTML=RES.map(function(r){
     var title=sn(r)+' 사이트'+(r.long?' · 장박':'');
     var sub=fmt(r.from)+' ~ '+fmt(r.to)+(r.long?' · 계약 '+nf(r.contract)+' · 남은 '+nf(r.left):' · '+r.nights+'박');
-    return '<label class="rc'+(r.done?' off':'')+'"><input type="checkbox" class="rk" data-s="'+r.id+'" '+(r.done?'disabled':(sel[r.id]?'checked':''))+' aria-label="'+title+' 체크인"><span class="rb2"><b>'+title+'</b><span class="rd">'+sub+'</span>'+(r.done?'<span class="rd">'+(r.long?'오늘은 이미 체크인하셨어요.':'이미 체크인하셨어요.')+'</span>':'')+'</span></label>';
+    return '<label class="rc'+(r.done?' off':'')+'"><input type="checkbox" class="rk" data-s="'+r.id+'" '+(r.done?'disabled':(sel[r.id]?'checked':''))+' aria-label="'+title+' 체크인"><span class="rb2"><b>'+title+'</b><span class="rd">'+sub+'</span>'+(r.done?'<span class="rd">'+(r.long?(r.coveredTo?'이미 체크인하셨어요. '+fmt(r.coveredTo)+' 퇴실 전까지는 다시 체크인하지 않아도 돼요. 더 머무시려면 프론트로 문의해 주세요.':'오늘은 이미 체크인하셨어요.'):'이미 체크인하셨어요.')+'</span>':'')+(r.long&&r.current?'<span class="rd">오늘 '+nf(r.current)+' 체크인하셨어요. 박수를 바꾸려면 체크해 주세요.</span>':'')+'</span></label>';
   }).join('')+(allDone?'<p class="lead" style="margin-top:6px">오늘 입실하는 예약은 모두 체크인을 마치셨어요.</p>':'');
   document.querySelectorAll('.rk').forEach(function(c){c.onchange=function(){sel[c.getAttribute('data-s')]=c.checked;$('rerr').textContent='';updateCta()}});
 }
@@ -637,9 +637,11 @@ function buildSeq(){
 function renderLong(){
   var L=longPicked(),first=L.some(function(r){return r.first});
   $('lT').textContent=first?'장박 이용을 시작할게요':'장박 이용 현황이에요';
-  $('lL').textContent=first?'계약 내용을 확인하고, 오늘 묵는 박수를 골라 주세요.':'오늘도 오셨네요. 오늘 묵는 박수를 골라 주세요.';
+  var chg=L.some(function(r){return r.current>0});
+  if(chg)$('lT').textContent='오늘 박수를 바꿀게요';
+  $('lL').textContent=chg?'오늘 체크인한 박수를 다시 골라 주세요.':first?'계약 내용을 확인하고, 오늘 묵는 박수를 골라 주세요.':'오늘도 오셨네요. 오늘 묵는 박수를 골라 주세요.';
   $('lbox').innerHTML=L.map(function(r){
-    if(nightsSel[r.id]==null)nightsSel[r.id]=Math.min(1,r.left);
+    if(nightsSel[r.id]==null)nightsSel[r.id]=r.current>0?r.current:Math.min(1,r.left);
     var extra=r.sites&&r.sites.length>1?'<p class="lsub">'+r.sites.slice(1).map(siteName).join(' · ')+' 사이트도 함께 이용 중이에요.</p>':'';
     var pay=r.pay>0?'<p class="lp">입금 현황 <b>총 '+won(r.pay)+' 중 '+won(r.got)+' 입금</b></p>':'';
     var body=r.left<0.5?'<p class="lmsg">남은 박수가 없어요. 연장은 프론트(010-5073-9214)로 문의해 주세요.</p>':
@@ -759,7 +761,7 @@ $('next').onclick=function(){
       setBusy(false);
       if(res&&res.ok&&((res.done&&res.done.length)||(res.already&&res.already.length))){
         DONE_NAMES=names;
-        DONE_L=longPicked().map(function(r){var n=nightsSel[r.id];return sn(r)+' 장박 · 오늘 '+nf(n)+' 사용 · 남은 박수 '+nf(Math.max(r.left-n,0))});
+        DONE_L=longPicked().map(function(r){var n=nightsSel[r.id];return sn(r)+' 장박 · 오늘 '+nf(n)+(r.current?'으로 변경':' 사용')+' · 남은 박수 '+nf(Math.max(r.left-n,0))});
         i=7;show();return}
       if(res&&res.code=='OVER'){eb.textContent='선택한 박수가 남은 박수보다 많아요. 연장은 프론트(010-5073-9214)로 문의해 주세요.';return}
       eb.textContent='기록하지 못했어요. 다시 눌러 보시거나 관리자 호출 버튼을 눌러 주세요.';
