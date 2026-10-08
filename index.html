@@ -298,6 +298,22 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 #s0 .rulebtn{margin-top:12px;height:68px;font-size:22px;max-width:none}
 @media (max-width:760px){.main{flex-wrap:wrap;padding:20px}.mapcol{position:static;width:min(100%,340px);margin-inline:auto}h1{font-size:30px}.cta{padding-inline:20px}.tiles{grid-template-columns:1fr}.big1{font-size:44px}}
 @media (prefers-reduced-motion:reduce){.stage{transition:none}.step.show{animation:none}.mk.pop,.mk.me:not(.off),.lab,.arw,.arf,.arm,.payhint .parrow{animation:none}.bar i{transition:none}}
+.lc{border:2px solid var(--line);border-radius:20px;padding:20px 24px;margin-bottom:14px;background:var(--paper)}
+.lc h2{font-family:var(--head);font-weight:400;font-size:30px;margin:0 0 4px}
+.lc .lsub{font-size:18px;color:var(--ink2);margin:0 0 12px}
+.lg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.lg div{background:var(--pine-soft);border-radius:12px;padding:10px 14px}
+.lg small{display:block;font-size:15px;color:var(--ink2)}
+.lg b{font-size:24px;font-variant-numeric:tabular-nums}
+.lp{font-size:20px;margin:0 0 14px}
+.lp b{color:var(--pine)}
+.lstep{display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding-top:14px}
+.lstep>span{font-size:21px;font-weight:700}
+.stp{display:flex;align-items:center;gap:14px}
+.stp button{width:64px;height:64px;border-radius:50%;border:2px solid var(--pine);background:#fff;color:var(--pine);font-size:34px;line-height:1;cursor:pointer}
+.stp output{min-width:110px;text-align:center;font-family:var(--head);font-size:38px;font-variant-numeric:tabular-nums}
+.lmsg{color:#d81b60;font-size:18px;font-weight:700;min-height:24px;margin:8px 0 0}
+.dl{font-size:22px;margin:-4px 0 14px;color:var(--ink2)}
 </style>
 <style>[hidden]{display:none!important}html{color-scheme:light}body{margin:0}img{max-width:100%}</style>
 </head>
@@ -430,9 +446,18 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
         <p class="err" id="cerr"></p>
       </section>
 
+      <section class="step center" id="s8">
+        <span class="eyebrow">장박 손님</span>
+        <h1 id="lT">장박 이용 현황이에요</h1>
+        <p class="lead" id="lL">오늘 묵는 박수를 골라 주세요.</p>
+        <div id="lbox"></div>
+        <p class="err" id="lerr"></p>
+      </section>
+
       <section class="step center" id="s7" style="position:relative;min-height:420px"><div class="wm" aria-hidden="true"></div><div style="position:relative">
         <div class="okpill">✓ 체크인 완료</div>
         <div class="big1" id="doneT">사이트입니다</div>
+        <p class="dl" id="doneL" hidden></p>
         <p class="lead" style="margin-bottom:6px">캠핑스토리를 찾아 주셔서 감사합니다.</p>
         <p class="lead">문의사항은 <span class="tel">010-5073-9214</span>로 연락해 주세요.</p>
         <p class="lead" id="doneCnt" style="font-size:17px;margin-top:-14px"></p>
@@ -459,7 +484,7 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 </div>
 
 <script>
-var N=8,i=0,cur=null,W=906,H=1614;
+var N=9,seq=[0,1,2,3,4,5,6,7],nightsSel={},DONE_L=[],i=0,cur=null,W=906,H=1614;
 var BL='#1e6fe0',RD='#d81b60',AM='#e08a00';
 var F=[
  {id:'wc',e:'🚻',n:'화장실',x:742,y:662,z:1.9,ent:[{x:687,y:680,a:0,c:BL,t:'남자 입구',lx:596,ly:650},{x:762,y:662,a:180,c:RD,t:'여자 입구',lx:838,ly:704}]},
@@ -484,7 +509,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261005-141422';
+var BUILD='20261008-164336';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
@@ -512,9 +537,9 @@ function pickedRes(){return RES.filter(function(r){return !r.done&&sel[r.id]})}
 function renderRes(){
   var allDone=RES.length&&RES.every(function(r){return r.done});
   $('res').innerHTML=RES.map(function(r){
-    var title=siteName(r.site)+' 사이트';
-    var sub=fmt(r.from)+' ~ '+fmt(r.to)+' · '+r.nights+'박';
-    return '<label class="rc'+(r.done?' off':'')+'"><input type="checkbox" class="rk" data-s="'+r.id+'" '+(r.done?'disabled':(sel[r.id]?'checked':''))+' aria-label="'+title+' 체크인"><span class="rb2"><b>'+title+'</b><span class="rd">'+sub+'</span>'+(r.done?'<span class="rd">이미 체크인하셨어요.</span>':'')+'</span></label>';
+    var title=sn(r)+' 사이트'+(r.long?' · 장박':'');
+    var sub=fmt(r.from)+' ~ '+fmt(r.to)+(r.long?' · 계약 '+nf(r.contract)+' · 남은 '+nf(r.left):' · '+r.nights+'박');
+    return '<label class="rc'+(r.done?' off':'')+'"><input type="checkbox" class="rk" data-s="'+r.id+'" '+(r.done?'disabled':(sel[r.id]?'checked':''))+' aria-label="'+title+' 체크인"><span class="rb2"><b>'+title+'</b><span class="rd">'+sub+'</span>'+(r.done?'<span class="rd">'+(r.long?'오늘은 이미 체크인하셨어요.':'이미 체크인하셨어요.')+'</span>':'')+'</span></label>';
   }).join('')+(allDone?'<p class="lead" style="margin-top:6px">오늘 입실하는 예약은 모두 체크인을 마치셨어요.</p>':'');
   document.querySelectorAll('.rk').forEach(function(c){c.onchange=function(){sel[c.getAttribute('data-s')]=c.checked;$('rerr').textContent='';updateCta()}});
 }
@@ -573,8 +598,40 @@ function overview(){
   document.getElementById('fdesc').innerHTML=rd('all');
   marks([],null);arrows();zoom(W/2,H/2,1);
 }
-var EN=['WELCOME','YOUR RESERVATION','FACILITIES','HOUSE RULES  I','HOUSE RULES  II','HOUSE RULES  III','GOOD TO KNOW','ENJOY YOUR STAY'];
-var CTA=['조회하기','확인했어요','다음','동의','동의','동의','체크인 완료','처음으로'];
+var EN=['WELCOME','YOUR RESERVATION','FACILITIES','HOUSE RULES  I','HOUSE RULES  II','HOUSE RULES  III','GOOD TO KNOW','ENJOY YOUR STAY','LONG STAY'];
+var CTA=['조회하기','확인했어요','다음','동의','동의','동의','체크인 완료','처음으로','다음'];
+function nf(n){return String(+n)+'박'}
+function won(n){return Number(n).toLocaleString('ko-KR')+'원'}
+function sn(x){return x.sites&&x.sites.length>1?x.sites.map(siteName).join(' · '):siteName(x.site)}
+function longPicked(){return pickedRes().filter(function(r){return r.long})}
+function nextId(){var k=seq.indexOf(i);return k>=0&&k<seq.length-1?seq[k+1]:7}
+function prevId(){var k=seq.indexOf(i);return k>0?seq[k-1]:0}
+function ctaOf(){return i==8?(nextId()==7?'체크인 완료':'다음'):CTA[i]}
+function buildSeq(){
+  var pr=pickedRes(),anyLong=pr.some(function(r){return r.long});
+  var needRules=pr.some(function(r){return !r.long||r.first});
+  seq=[0,1].concat(anyLong?[8]:[]).concat(needRules?[2,3,4,5,6]:[]).concat([7]);
+}
+function renderLong(){
+  var L=longPicked(),first=L.some(function(r){return r.first});
+  $('lT').textContent=first?'장박 이용을 시작할게요':'장박 이용 현황이에요';
+  $('lL').textContent=first?'계약 내용을 확인하고, 오늘 묵는 박수를 골라 주세요.':'오늘도 오셨네요. 오늘 묵는 박수를 골라 주세요.';
+  $('lbox').innerHTML=L.map(function(r){
+    if(nightsSel[r.id]==null)nightsSel[r.id]=Math.min(1,r.left);
+    var extra=r.sites&&r.sites.length>1?'<p class="lsub">'+r.sites.slice(1).map(siteName).join(' · ')+' 사이트도 함께 이용 중이에요.</p>':'';
+    var pay=r.pay>0?'<p class="lp">입금 현황 <b>총 '+won(r.pay)+' 중 '+won(r.got)+' 입금</b></p>':'';
+    var body=r.left<0.5?'<p class="lmsg">남은 박수가 없어요. 연장은 프론트(010-5073-9214)로 문의해 주세요.</p>':
+      '<div class="lstep"><span>오늘 묵는 박수</span><div class="stp"><button type="button" data-d="-0.5" data-i="'+r.id+'" aria-label="0.5박 줄이기">−</button><output id="lo_'+r.id+'">'+nf(nightsSel[r.id])+'</output><button type="button" data-d="0.5" data-i="'+r.id+'" aria-label="0.5박 늘리기">+</button></div></div><p class="lmsg" id="lm_'+r.id+'"></p>';
+    return '<div class="lc"><h2>'+sn(r)+' 사이트 · 장박</h2><p class="lsub">'+fmt(r.from)+' ~ '+fmt(r.to)+'</p>'+extra+
+      '<div class="lg"><div><small>계약 박수</small><b>'+nf(r.contract)+'</b></div><div><small>이용한 박수</small><b>'+nf(r.used)+'</b></div><div><small>남은 박수</small><b>'+nf(r.left)+'</b></div></div>'+pay+body+'</div>';
+  }).join('');
+  document.querySelectorAll('#lbox .stp button').forEach(function(b){b.onclick=function(){
+    var id=b.getAttribute('data-i'),r=RES.filter(function(x){return x.id==id})[0],d=+b.getAttribute('data-d'),v=nightsSel[id]+d,m=$('lm_'+id);
+    if(v<0.5){return}
+    if(v>r.left){m.textContent='남은 박수를 모두 선택하셨어요. 더 머무시려면 프론트(010-5073-9214)로 연장을 문의해 주세요.';return}
+    m.textContent='';nightsSel[id]=v;$('lo_'+id).textContent=nf(v);$('lerr').textContent='';
+  }});
+}
 var DONE_NAMES=[];
 var viewRules=false,idleT,warnT,doneTimer,doneCnt=0,IDLE=90000;
 function $(id){return document.getElementById(id)}
@@ -583,12 +640,12 @@ function startDone(){stopDone();doneCnt=15;$('doneCnt').textContent=doneCnt+'초
 function arm(){
   clearTimeout(idleT);clearTimeout(warnT);$('idle').hidden=true;
   var busy=(i>0)||viewRules||$('nm').value||$('ph').value;
-  if(!busy||i==N-1)return;
+  if(!busy||i==7)return;
   warnT=setTimeout(function(){$('idle').hidden=false},IDLE-15000);
   idleT=setTimeout(resetAll,IDLE);
 }
 function resetAll(){
-  $('helpSheet').hidden=true;$('storeSheet').hidden=true;document.querySelectorAll('.rk2').forEach(function(c){c.checked=false});document.querySelectorAll('.ckerr').forEach(function(e){e.textContent=''});stopDone();viewRules=false;i=0;cur=null;sel={};RES=[];lookupName='';lookupL4='';consentIso='';busy=false;
+  $('helpSheet').hidden=true;$('storeSheet').hidden=true;document.querySelectorAll('.rk2').forEach(function(c){c.checked=false});document.querySelectorAll('.ckerr').forEach(function(e){e.textContent=''});stopDone();viewRules=false;i=0;cur=null;sel={};RES=[];lookupName='';lookupL4='';consentIso='';busy=false;seq=[0,1,2,3,4,5,6,7];nightsSel={};DONE_L=[];
   $('nm').value='';$('ph').value='';$('err').textContent='';$('rerr').textContent='';$('cerr').textContent='';
   show();setTimeout(checkUpdate,500);
 }
@@ -601,21 +658,23 @@ function openRules(){
 function show(){
   for(var k=0;k<N;k++)$('s'+k).className='step'+(k==2?'':' center')+((k==i&&!viewRules)?' show':'');
   $('sr').className='step center'+(viewRules?' show':'');
-  $('bar').style.width=(viewRules?100:((i+1)/N*100))+'%';
-  $('cnt').textContent=viewRules?'운영수칙':(i+1)+' / '+N;
+  var pos=Math.max(seq.indexOf(i),0),tot=seq.length;
+  $('bar').style.width=(viewRules?100:((pos+1)/tot*100))+'%';
+  $('cnt').textContent=viewRules?'운영수칙':(pos+1)+' / '+tot;
   $('app').setAttribute('data-s',viewRules?0:i);
-  $('segs').innerHTML=Array.apply(null,Array(N)).map(function(_,k){return '<i class="'+(k<=i?'on':'')+'"></i>'}).join('');
+  $('segs').innerHTML=Array.apply(null,Array(tot)).map(function(_,k){return '<i class="'+(k<=pos?'on':'')+'"></i>'}).join('');
   $('enl').textContent=EN[i];
   var pr=pickedRes();
   var rng='';if(pr.length){var f0=pr.map(function(x){return x.from}).sort()[0],t0=pr.map(function(x){return x.to}).sort().slice(-1)[0];rng=fmt(f0)+' ~ '+fmt(t0)}
-  $('ctasum').innerHTML=(i>=1&&!viewRules)?'<b>'+(pr.length?pr.map(function(x){return siteName(x.site)}).join(' · ')+' 사이트':'체크인')+'</b><small>'+rng+'</small>':'';
+  $('ctasum').innerHTML=(i>=1&&!viewRules)?'<b>'+(pr.length?pr.map(sn).join(' · ')+' 사이트':'체크인')+'</b><small>'+rng+'</small>':'';
   if(i==1&&!viewRules)renderRes();
-  if(i==7)$('doneT').textContent=DONE_NAMES.join(' · ')+' 사이트입니다';
+  if(i==8&&!viewRules)renderLong();
+  if(i==7){$('doneT').textContent=DONE_NAMES.join(' · ')+' 사이트입니다';$('doneL').hidden=!DONE_L.length;$('doneL').innerHTML=DONE_L.join('<br>')}
   $('mapcol').hidden=(viewRules||i!=2);
   if(i==2&&!viewRules){if(cur)pick(cur);else overview()}
-  $('back').style.visibility=(viewRules||i==0||i==N-1)?'hidden':'visible';
+  $('back').style.visibility=(viewRules||i==0||i==7)?'hidden':'visible';
   document.querySelector('.cta').hidden=(i==0&&!viewRules);
-  $('next').textContent=viewRules?'닫기':CTA[i];
+  $('next').textContent=viewRules?'닫기':ctaOf();
   if(i==7&&!viewRules)startDone();else stopDone();
   window.scrollTo&&document.querySelector('.app').scrollIntoView({block:'nearest'});
   updateCta();
@@ -641,7 +700,7 @@ function updateCta(){
   }
   $('next').classList.toggle('dim',dim);
 }
-function setBusy(on,label){busy=on;$('next').disabled=on;$('next').textContent=on?label:(viewRules?'닫기':CTA[i]);$('goBtn').disabled=on;$('goBtn').textContent=on?label:'내 예약 확인하기'}
+function setBusy(on,label){busy=on;$('next').disabled=on;$('next').textContent=on?label:(viewRules?'닫기':ctaOf());$('goBtn').disabled=on;$('goBtn').textContent=on?label:'내 예약 확인하기'}
 var STEPN=['조회','예약 확인','시설 안내','수칙 1','수칙 2','수칙 3','안내 확인','완료'];
 $('next').onclick=function(){
   if(busy)return;
@@ -659,25 +718,36 @@ $('next').onclick=function(){
     }).catch(function(){setBusy(false);e.textContent='연결이 잘 안 돼요. 잠시 후 다시 해 보시거나 관리자 호출 버튼을 눌러 주세요.'});
     return;
   }
-  if(i==1){if(!picked().length){$('rerr').textContent=RES.length&&RES.every(function(r){return r.done})?'오늘 체크인할 사이트가 더 없어요.':'체크인할 사이트에 체크해 주세요.';return}$('rerr').textContent=''}
+  if(i==1){if(!picked().length){$('rerr').textContent=RES.length&&RES.every(function(r){return r.done})?'오늘 체크인할 사이트가 더 없어요.':'체크인할 사이트에 체크해 주세요.';return}$('rerr').textContent='';buildSeq()}
   if(i>=3&&i<=5){
     if(!allChecked('s'+i)){document.querySelector('#s'+i+' .ckerr').textContent='모든 항목에 체크해 주세요.';updateCta();return}
   }
   if(i==5){consentIso=new Date().toISOString()}
-  if(i==6){
-    setBusy(true,'기록하는 중…');$('cerr').textContent='';
-    var names=pickedRes().map(function(x){return siteName(x.site)});
-    api('checkin',[lookupName,lookupL4,pickedIds(),consentIso]).then(function(res){
+  if(i==8){
+    var bad=longPicked().filter(function(r){return !(nightsSel[r.id]>=0.5)});
+    if(bad.length){$('lerr').textContent=bad.some(function(r){return r.left<0.5})?'남은 박수가 없는 사이트가 있어요. 프론트(010-5073-9214)로 문의해 주세요.':'박수를 골라 주세요.';return}
+    $('lerr').textContent=''
+  }
+  if(i!=7&&nextId()==7){
+    var eb=$(i==8?'lerr':'cerr');
+    setBusy(true,'기록하는 중…');eb.textContent='';
+    var pr0=pickedRes(),names=pr0.map(sn),nmap={};
+    longPicked().forEach(function(r){nmap[r.id]=nightsSel[r.id]});
+    api('checkin',[lookupName,lookupL4,pickedIds(),consentIso,nmap]).then(function(res){
       setBusy(false);
-      if(res&&res.ok&&((res.done&&res.done.length)||(res.already&&res.already.length))){DONE_NAMES=names;i=7;show();return}
-      $('cerr').textContent='기록하지 못했어요. 다시 눌러 보시거나 관리자 호출 버튼을 눌러 주세요.';
-    }).catch(function(){setBusy(false);$('cerr').textContent='연결이 잘 안 돼요. 다시 눌러 보시거나 관리자 호출 버튼을 눌러 주세요.'});
+      if(res&&res.ok&&((res.done&&res.done.length)||(res.already&&res.already.length))){
+        DONE_NAMES=names;
+        DONE_L=longPicked().map(function(r){var n=nightsSel[r.id];return sn(r)+' 장박 · 오늘 '+nf(n)+' 사용 · 남은 박수 '+nf(Math.max(r.left-n,0))});
+        i=7;show();return}
+      if(res&&res.code=='OVER'){eb.textContent='선택한 박수가 남은 박수보다 많아요. 연장은 프론트(010-5073-9214)로 문의해 주세요.';return}
+      eb.textContent='기록하지 못했어요. 다시 눌러 보시거나 관리자 호출 버튼을 눌러 주세요.';
+    }).catch(function(){setBusy(false);eb.textContent='연결이 잘 안 돼요. 다시 눌러 보시거나 관리자 호출 버튼을 눌러 주세요.'});
     return;
   }
-  if(i==N-1){resetAll();return}
-  i=i+1;show();
+  if(i==7){resetAll();return}
+  i=nextId();show();
 };
-$('back').onclick=function(){i=Math.max(0,i-1);show()};
+$('back').onclick=function(){i=prevId();show()};
 $('help').onclick=function(){$('helpSheet').hidden=false};
 $('helpClose').onclick=function(){$('helpSheet').hidden=true};
 $('storeBtn').onclick=function(){$('storeSheet').hidden=false};
