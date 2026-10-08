@@ -317,6 +317,23 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 .ltime div{border:2px solid var(--line);border-radius:14px;padding:10px 16px}
 .ltime small{display:block;font-size:15px;color:var(--ink2)}
 .ltime b{font-size:23px}
+#s8 .eyebrow{display:none}
+#s8 h1{font-size:40px;margin:0 0 4px}
+#s8 .lead{font-size:18px;margin:0 0 10px}
+#s8 .lc{padding:12px 20px;margin-bottom:8px}
+#s8 .lc h2{font-size:26px}
+#s8 .lc .lsub{font-size:16px;margin:0 0 6px}
+#s8 .lg{margin-bottom:6px}
+#s8 .lg div{padding:6px 12px}
+#s8 .lg b{font-size:21px}
+#s8 .lp{font-size:18px;margin:0 0 8px}
+#s8 .lstep{padding-top:8px}
+#s8 .stp button{width:52px;height:52px;font-size:30px}
+#s8 .stp output{font-size:32px}
+#s8 .lmsg{margin:4px 0 0;min-height:20px;font-size:16px}
+#s8 .ltime div{padding:6px 14px}
+#s8 .ltime b{font-size:21px}
+#s8 .err{margin:4px 0 0;min-height:0}
 .dl{font-size:22px;margin:-4px 0 14px;color:var(--ink2)}
 </style>
 <style>[hidden]{display:none!important}html{color-scheme:light}body{margin:0}img{max-width:100%}</style>
@@ -514,7 +531,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261008-205956';
+var BUILD='20261008-210046';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
