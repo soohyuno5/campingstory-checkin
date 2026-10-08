@@ -531,7 +531,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261008-211826';
+var BUILD='20261008-212025';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
@@ -622,6 +622,7 @@ function overview(){
 }
 var EN=['WELCOME','YOUR RESERVATION','FACILITIES','HOUSE RULES  I','HOUSE RULES  II','HOUSE RULES  III','GOOD TO KNOW','ENJOY YOUR STAY','LONG STAY'];
 var CTA=['조회하기','확인했어요','다음','동의','동의','동의','체크인 완료','처음으로','다음'];
+function wk(d){var w=Math.round(d/7);return (d%7?'약 ':'')+w+'주'}
 function nf(n){return String(+n)+'박'}
 function won(n){return Number(n).toLocaleString('ko-KR')+'원'}
 function sn(x){return x.sites&&x.sites.length>1?x.sites.map(siteName).join(' · '):siteName(x.site)}
@@ -646,7 +647,7 @@ function renderLong(){
     var pay=r.pay>0?'<p class="lp">입금 현황 <b>총 '+won(r.pay)+' 중 '+won(r.got)+' 입금</b></p>':'';
     var body=r.left<0.5?'<p class="lmsg">남은 박수가 없어요. 연장은 프론트(010-5073-9214)로 문의해 주세요.</p>':
       '<div class="lstep"><span>오늘 묵는 박수</span><div class="stp"><button type="button" data-d="-0.5" data-i="'+r.id+'" aria-label="0.5박 줄이기">−</button><output id="lo_'+r.id+'">'+nf(nightsSel[r.id])+'</output><button type="button" data-d="0.5" data-i="'+r.id+'" aria-label="0.5박 늘리기">+</button></div></div><p class="lmsg" id="lm_'+r.id+'"></p>';
-    return '<div class="lc"><h2>'+sn(r)+' 사이트 · 장박</h2><p class="lsub">'+fmt(r.from)+' ~ '+fmt(r.to)+'</p>'+extra+
+    return '<div class="lc"><h2>'+sn(r)+' 사이트 · 장박</h2><p class="lsub">'+fmt(r.from)+' ~ '+fmt(r.to)+' · '+wk(r.nights)+'</p>'+extra+
       '<div class="lg"><div><small>계약 박수</small><b>'+nf(r.contract)+'</b></div><div><small>이용한 박수</small><b>'+nf(r.used)+'</b></div><div><small>남은 박수</small><b>'+nf(r.left)+'</b></div></div>'+pay+body+'</div>';
   }).join('');
   document.querySelectorAll('#lbox .stp button').forEach(function(b){b.onclick=function(){
