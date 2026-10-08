@@ -35,7 +35,7 @@ body{word-break:keep-all;line-break:strict;background:var(--paper);color:var(--i
 /* header + progress */
 .hd{display:flex;align-items:center;gap:14px;padding:12px 24px}
 .brand{margin-right:auto;display:flex;align-items:center}
-.logo{height:34px;width:auto;display:block}
+.logo{height:46px;width:auto;display:block}
 .logo.big{height:56px}
 .lg-d{display:none}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lg-l{display:none}:root:not([data-theme="light"]) .lg-d{display:block}}
@@ -103,7 +103,7 @@ h1{font-family:var(--head);font-size:40px;line-height:1.25;margin:0 0 10px;font-
 .sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:20px}
 .sum div{border:2px solid var(--line);border-radius:16px;padding:16px 18px;font-size:21px;font-weight:700;background:var(--paper)}
 .sum small{display:block;color:var(--ink2);font-size:15px;font-weight:400}
-.wm{position:absolute;right:-6px;bottom:-4px;width:min(70%,420px);aspect-ratio:520/259;background:var(--pine);opacity:.09;-webkit-mask:url(symbol.png) center/contain no-repeat;mask:url(symbol.png) center/contain no-repeat;pointer-events:none}
+.wm{position:absolute;right:-6px;bottom:-4px;width:min(70%,420px);aspect-ratio:1238/904;background:var(--pine);opacity:.09;-webkit-mask:url(symbol.png) center/contain no-repeat;mask:url(symbol.png) center/contain no-repeat;pointer-events:none}
 /* CTA bar */
 .cta{display:flex;gap:14px;padding:14px 40px 22px;border-top:1px solid var(--line);background:var(--card)}
 .cta button{font-family:inherit;cursor:pointer;border-radius:18px;height:72px;font-size:24px;font-weight:700}
@@ -531,7 +531,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261008-212025';
+var BUILD='20261008-214928';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
@@ -560,7 +560,7 @@ function renderRes(){
   var allDone=RES.length&&RES.every(function(r){return r.done});
   $('res').innerHTML=RES.map(function(r){
     var title=sn(r)+' 사이트'+(r.long?' · 장박':'');
-    var sub=fmt(r.from)+' ~ '+fmt(r.to)+(r.long?' · 계약 '+nf(r.contract)+' · 남은 '+nf(r.left):' · '+r.nights+'박');
+    var sub=fmt(r.from)+' ~ '+fmt(r.to)+(r.long?' · 계약 '+nf(r.contract)+' · 남은 박수 '+nf(r.left):' · '+r.nights+'박');
     return '<label class="rc'+(r.done?' off':'')+'"><input type="checkbox" class="rk" data-s="'+r.id+'" '+(r.done?'disabled':(sel[r.id]?'checked':''))+' aria-label="'+title+' 체크인"><span class="rb2"><b>'+title+'</b><span class="rd">'+sub+'</span>'+(r.done?'<span class="rd">'+(r.long?(r.coveredTo?'이미 체크인하셨어요. '+fmt(r.coveredTo)+' 퇴실 전까지는 다시 체크인하지 않아도 돼요. 더 머무시려면 프론트로 문의해 주세요.':'오늘은 이미 체크인하셨어요.'):'이미 체크인하셨어요.')+'</span>':'')+(r.long&&r.current?'<span class="rd">오늘 '+nf(r.current)+' 체크인하셨어요. 박수를 바꾸려면 체크해 주세요.</span>':'')+'</span></label>';
   }).join('')+(allDone?'<p class="lead" style="margin-top:6px">오늘 입실하는 예약은 모두 체크인을 마치셨어요.</p>':'');
   document.querySelectorAll('.rk').forEach(function(c){c.onchange=function(){sel[c.getAttribute('data-s')]=c.checked;$('rerr').textContent='';updateCta()}});
