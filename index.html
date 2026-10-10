@@ -426,7 +426,7 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
       <section class="step center" id="s6">
         <h1>그 밖에 확인해 주세요</h1>
                 <div class="tiles">
-          <div class="tile"><small>퇴실</small><b>11:00까지예요</b><p>늦은 퇴실은 다음 예약이 없고 미리 확인된 경우에만 15:00까지 가능하고, 20,000원이 추가돼요.</p></div>
+          <div class="tile"><small>퇴실</small><b>12:00까지예요</b><p>늦은 퇴실은 다음 예약이 없고 미리 확인된 경우에만 17:00까지 가능하고, 오토캠핑 20,000원·백패킹 15,000원이 추가돼요.</p></div>
           <div class="tile"><small>화로·불</small><b>텐트 안에서는 사용 금지</b><p>재는 완전히 식은 뒤 버리고, 화로와 재그릇은 야외 개수대에서 씻어 주세요. 재는 옆 재통에 버려 주세요.</p></div>
           <div class="tile"><small>전기</small><b>사이트당 600W까지</b><p>전기히터, 전기밥솥, 에어컨처럼 600W를 넘는 기기는 사용할 수 없어요.</p></div>
           <div class="tile"><small>반려동물</small><b>함께 오셨나요?</b><p>함께 오셨다면 목줄과 배변 처리를 꼭 확인해 주세요. 입마개가 필요하면 착용해 주세요. 심하게 짖으면 이용이 제한될 수 있어요.</p></div>
@@ -484,7 +484,7 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
         <p class="lead">문의사항은 <span class="tel">010-5073-9214</span>로 연락해 주세요.</p>
         <p class="lead" id="doneCnt" style="font-size:17px;margin-top:-14px"></p>
         <div class="sum">
-          <div><small>퇴실</small><span id="doneOut">11:00까지</span></div>
+          <div><small>퇴실</small><span id="doneOut">12:00까지</span></div>
           <div><small>매너타임</small>22:30 ~ 08:00</div>
           <div><small>방문객</small>입구 옆 주차 / 22:00까지 퇴실</div>
           <div><small>쓰레기</small>일반쓰레기는 종량제 봉투</div>
@@ -531,7 +531,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261008-214928';
+var BUILD='20261010-194040';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
@@ -694,7 +694,7 @@ function show(){
   $('ctasum').innerHTML=(i>=1&&!viewRules)?'<b>'+(pr.length?pr.map(sn).join(' · ')+' 사이트':'체크인')+'</b><small>'+rng+'</small>':'';
   if(i==1&&!viewRules)renderRes();
   if(i==8&&!viewRules)renderLong();
-  if(i==7){$('doneT').textContent=DONE_NAMES.join(' · ')+' 사이트입니다';$('doneL').hidden=!DONE_L.length;$('doneOut').textContent=(pickedRes().length&&pickedRes().every(function(r){return r.long}))?'12:00까지 (0.5박은 17:00까지)':'11:00까지';$('doneL').innerHTML=DONE_L.join('<br>')}
+  if(i==7){$('doneT').textContent=DONE_NAMES.join(' · ')+' 사이트입니다';$('doneL').hidden=!DONE_L.length;$('doneOut').textContent=(pickedRes().length&&pickedRes().every(function(r){return r.long}))?'12:00까지 (0.5박은 17:00까지)':'12:00까지';$('doneL').innerHTML=DONE_L.join('<br>')}
   $('mapcol').hidden=(viewRules||i!=2);
   if(i==2&&!viewRules){if(cur)pick(cur);else overview()}
   $('back').style.visibility=(viewRules||i==0||i==7)?'hidden':'visible';
