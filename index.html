@@ -427,9 +427,9 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
         <h1>그 밖에 확인해 주세요</h1>
                 <div class="tiles">
           <div class="tile"><small>퇴실</small><b>12:00까지예요</b><p>늦은 퇴실은 다음 예약이 없고 미리 확인된 경우에만 17:00까지 가능하고, 오토캠핑 20,000원·백패킹 15,000원이 추가돼요.</p></div>
-          <div class="tile"><small>화로·불</small><b>텐트 안에서는 사용 금지</b><p>재는 완전히 식은 뒤 버리고, 화로와 재그릇은 야외 개수대에서 씻어 주세요. 재는 옆 재통에 버려 주세요.</p></div>
+          <div class="tile"><small>화로·불</small><b>백패킹 구역은 숯·화로대·장작 사용 불가</b><p>텐트 안에서는 어느 구역이든 화기를 사용할 수 없어요. 재는 완전히 식은 뒤 옆 재통에 버리고, 화로와 재그릇은 야외 개수대에서 씻어 주세요.</p></div>
           <div class="tile"><small>전기</small><b>사이트당 600W까지</b><p>전기히터, 전기밥솥, 에어컨처럼 600W를 넘는 기기는 사용할 수 없어요.</p></div>
-          <div class="tile"><small>반려동물</small><b>함께 오셨나요?</b><p>함께 오셨다면 목줄과 배변 처리를 꼭 확인해 주세요. 입마개가 필요하면 착용해 주세요. 심하게 짖으면 이용이 제한될 수 있어요.</p></div>
+          <div class="tile"><small>반려동물</small><b>함께 오셨나요?</b><p>목줄은 필수예요. 대소변은 바로 치워 주세요. 짖는 반려견은 출입할 수 없고, 예방접종은 필수예요.</p></div>
         </div>
         <p class="note2">운영수칙을 지키지 않아 생기는 불이익에 대해서는 캠핑장에서 책임지지 않아요.</p>
         <details class="more"><summary>전체 이용수칙 보기</summary>
@@ -454,10 +454,10 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
             <li>매점은 무인으로 운영돼요. 상품은 프론트 키오스크에서 고른 뒤 바로 결제해 주세요. 현금이나 계좌이체는 010-5073-9214로 말씀해 주세요.</li></ul>
           <div class="grp">전기</div><ul><li>소나무숲 백패킹 구역의 전기 사용은 별도 요금과 조건이 적용돼요.</li></ul>
           <div class="grp">불멍과 화로</div><ul>
-            <li>불멍, 화로대, 바비큐는 백패킹존을 제외한 구역에서 가능해요.</li>
+            <li>백패킹존은 숯, 화로대, 장작을 사용할 수 없어요. 불멍, 화로대, 바비큐는 백패킹존을 제외한 구역에서 가능해요.</li>
             <li>난로를 사용할 때는 환기와 일산화탄소(CO) 감지기가 필수예요.</li>
             <li>강풍, 건조, 화재 위험이 있으면 이용이 제한될 수 있어요.</li></ul>
-          <div class="grp">반려동물</div><ul><li>반려동물은 오토캠핑 구역에서 동반 숙박이 가능해요. 기본 포함 1마리, 최대 20kg · 체고 100cm 기준이에요.</li></ul>
+          <div class="grp">반려동물</div><ul><li>반려동물은 오토캠핑 구역에서 동반 숙박이 가능해요. 기본 포함 1마리, 최대 20kg · 체고 100cm 기준이에요.</li><li>목줄은 필수이고, 대소변은 바로 치워 주세요. 짖는 반려견은 출입할 수 없고, 예방접종은 필수예요.</li></ul>
           <div class="grp">안전과 기타</div><ul>
             <li>어린이는 보호자가 꼭 함께해 주세요. 트램폴린과 잔디쉼터도 보호자 동반이 필수예요.</li>
             <li>과음과 폭죽은 금지예요.</li>
@@ -531,7 +531,7 @@ var DESC={
  shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261010-194040';
+var BUILD='20261010-204208';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
