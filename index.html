@@ -113,8 +113,8 @@ h1{font-family:var(--head);font-size:40px;line-height:1.25;margin:0 0 10px;font-
 button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--pine);outline-offset:2px}
 /* map */
 .mapcol[hidden]{display:none}
-.mapcol{flex:0 0 auto;position:sticky;top:12px;align-self:flex-start;width:min(36vw,360px,calc((100dvh - 250px) * .5613))}
-.vp{position:relative;width:100%;aspect-ratio:906/1614;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#2b3a2c}
+.mapcol{flex:0 0 auto;position:sticky;top:12px;align-self:flex-start;width:min(36vw,360px,calc((100dvh - 250px) * .5628))}
+.vp{position:relative;width:100%;aspect-ratio:941/1672;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#2b3a2c}
 .stage{position:absolute;inset:0;transform-origin:0 0;transition:transform .55s cubic-bezier(.3,.7,.2,1)}
 .stage img{width:100%;height:100%;display:block}
 .mk{position:absolute;transform:translate(-50%,-50%);height:calc(26px / var(--s,1));padding:0 calc(10px / var(--s,1));border-radius:99px;display:flex;align-items:center;font-size:calc(14px / var(--s,1));font-weight:700;white-space:nowrap;background:var(--pine);color:var(--pine-ink);border:calc(2px / var(--s,1)) solid #fff;transition:opacity .3s}
@@ -494,8 +494,8 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 
     </div>
     <aside class="mapcol" id="mapcol" hidden>
-      <div class="vp" id="vp"><div class="stage" id="stage"><img src="map.jpg" alt="캠핑스토리 드론 배치도"><div class="ov" id="ov"></div><div id="labs"></div></div></div>
-      <div class="cap">실제 드론 배치도</div>
+      <div class="vp" id="vp"><div class="stage" id="stage"><img src="map.jpg" alt="캠핑스토리 배치도"><div class="ov" id="ov"></div><div id="labs"></div></div></div>
+      <div class="cap">캠핑스토리 배치도</div>
     </aside>
   </div>
   <div class="cta">
@@ -507,17 +507,17 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 </div>
 
 <script>
-var N=9,seq=[0,1,2,3,4,5,6,7],nightsSel={},DONE_L=[],i=0,cur=null,W=906,H=1614;
+var N=9,seq=[0,1,2,3,4,5,6,7],nightsSel={},DONE_L=[],i=0,cur=null,W=941,H=1672;
 var BL='#1e6fe0',RD='#d81b60',AM='#e08a00';
 var F=[
- {id:'wc',e:'🚻',n:'화장실',x:742,y:662,z:1.9,ent:[{x:687,y:680,a:0,c:BL,t:'남자 입구',lx:596,ly:650},{x:762,y:662,a:180,c:RD,t:'여자 입구',lx:838,ly:704}]},
- {id:'sh',e:'🚿',n:'샤워실',x:742,y:718,z:1.9,ent:[{x:687,y:711,a:0,c:AM,t:'샤워실 입구',lx:585,ly:748}]},
- {id:'sink',e:'🚰',n:'개수대',x:742,y:774,z:1.9,ent:[{x:696,y:800,a:-90,c:AM,t:'개수대 입구',lx:696,ly:892}]},
- {id:'out',e:'🔥',n:'야외 개수대',extra:'재 버리는 통',sm:true,x:745,y:622,oy:8,z:2.0,zx:762,zy:650},
- {id:'clean',e:'♻️',n:'클린하우스',x:436,y:1403,z:1.6},
- {id:'pk',e:'🅿️',n:'주차장',x:285,y:470,z:1.4,zx:285,zy:480,area:{c:'#1f8a63',p:[[490,318],[330,322],[250,390],[215,520],[210,640],[260,740],[340,830],[400,810],[405,740],[345,650],[345,600],[420,570],[475,520],[480,400]]}},
- {id:'vpk',e:'🚗',n:'방문객 주차장',x:210,y:1434,z:1.8,zx:210,zy:1400,area:{c:'#e0702e',p:[[200,1727],[268,1657],[300,1693],[232,1762]]}},
- {id:'shop',e:'🏪',n:'매점·관리동',x:512,y:650,z:1.5,ent:[{x:428,y:631,a:0,c:AM,t:'매점·관리동 입구',lx:395,ly:582}]}
+ {id:'wc',e:'🚻',n:'화장실',x:775,y:700,z:1.9,ent:[{x:706,y:700,a:0,c:BL,t:'남자 입구',lx:640,ly:660},{x:846,y:700,a:180,c:RD,t:'여자 입구',lx:880,ly:650}]},
+ {id:'sh',e:'🚿',n:'샤워실',x:775,y:757,z:1.9,ent:[{x:706,y:757,a:0,c:AM,t:'샤워실 입구',lx:630,ly:800}]},
+ {id:'sink',e:'🚰',n:'개수대',x:775,y:812,z:1.9,ent:[{x:775,y:845,a:-90,c:AM,t:'개수대 입구',lx:775,ly:935}]},
+ {id:'out',e:'🔥',n:'야외 개수대',extra:'재 버리는 통',sm:true,x:775,y:648,z:2.0,zx:775,zy:690},
+ {id:'clean',e:'♻️',n:'클린하우스',x:476,y:1462,z:1.6},
+ {id:'pk',e:'🅿️',n:'주차장',x:330,y:480,z:1.4,area:{c:'#1f8a63',p:[[300,290],[420,280],[425,350],[400,420],[400,560],[380,640],[290,650],[265,560],[270,420]]}},
+ {id:'vpk',e:'🚗',n:'방문객 주차장',x:180,y:1480,z:1.8,area:{c:'#e0702e',p:[[110,1368],[305,1505],[300,1540],[250,1598],[145,1595],[55,1440]]}},
+ {id:'shop',e:'🏪',n:'체크인·매점',x:519,y:724,z:1.5,ent:[{x:468,y:700,a:0,c:AM,t:'체크인·매점 입구',lx:420,ly:640}]}
 ];
 var STAR=function(t){return {l:'<span class="st2">★</span><u>'+t+'</u><span class="st2">★</span>'}};
 var DESC={
@@ -529,10 +529,10 @@ var DESC={
  clean:['클린하우스',STAR('분리수거 철저!'),'일반쓰레기는 반드시 종량제 봉투에 담아 주세요.','종량제 봉투가 없으면 매점에 문의해 주세요.','캔, 플라스틱, 종이는 부피를 압축해서 배출해 주세요.'],
  pk:['주차장','캠핑장 안 주차장이에요.','주차는 주차장을 이용해 주세요.','차량 통로를 막지 않는 선에서는 사이트 안에도 주차할 수 있어요.'],
  vpk:['방문객 주차장','방문객 차량은 반드시 캠핑장 입구 옆, 표시된 곳에 주차해 주세요.'],
- shop:['매점·관리동','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
+ shop:['체크인·매점','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261011-001708';
+var BUILD='20261017-213902';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
@@ -540,7 +540,7 @@ var KEY='';
   if(hm){KEY=decodeURIComponent(hm[1]);try{localStorage.setItem('csk',KEY)}catch(e){}try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
   else{try{KEY=localStorage.getItem('csk')||''}catch(e){}}
 })();
-var SITE_XY={'1':[575,1393],'2':[586,1327],'3':[587,1275],'4':[590,1188],'5':[592,1112],'6':[587,1023],'7':[592,953],'8':[613,873],'9-1':[338,1327],'9':[348,1237],'10':[358,1163],'11':[366,1090],'12':[378,1017],'13':[385,940],'14':[388,851],'15':[420,443],'16':[456,277],'17':[546,326],'18':[604,396],'19':[646,470],'20':[686,534],'21':[295,192],'22':[452,143],'B1':[197,1290],'B2':[116,1136],'B3':[234,996],'B4':[134,820],'B5':[178,640],'B6':[70,600]};
+var SITE_XY={'1':[643,1385],'2':[646,1316],'3':[642,1251],'4':[639,1186],'5':[638,1120],'6':[638,1051],'7':[637,982],'8':[638,912],'9-1':[403,1333],'9':[402,1253],'10':[412,1185],'11':[417,1112],'12':[422,1041],'13':[425,966],'14':[427,890],'15':[477,490],'16':[493,323],'17':[611,367],'18':[660,442],'19':[707,517],'20':[753,590],'21':[340,235],'22':[473,182],'B1':[232,1333],'B2':[158,1175],'B3':[272,1033],'B4':[186,867],'B5':[218,673],'B6':[89,607]};
 // 2026-10-02 원장 백패킹 표기 B1~B6 통일. 옛 이름(데크1·파쇄석5)이 와도 B로 바꿔 쓴다.
 function siteShort(s){var m=String(s).match(/^(데크|파쇄석)(\d)$/);return m?'B'+m[2]:String(s)}
 function siteName(s){var k=siteShort(s);return /^B\d$/.test(k)?k:k+'번'}
@@ -597,7 +597,7 @@ function marks(vis,on,hide){
   });
 }
 function arrows(ents,area){
-  var svg='',lab='',K=906/1080;
+  var svg='',lab='',K=1;
   if(area){var pts=area.p.map(function(q){return (q[0]*K)+','+(q[1]*K)}).join(' ');svg+='<polygon class="arf" points="'+pts+'" fill="'+area.c+'" fill-opacity=".32" stroke="#fff" stroke-width="10" stroke-linejoin="round"/><polygon class="arm" points="'+pts+'" fill="none" stroke="'+area.c+'" stroke-width="6" stroke-linejoin="round" stroke-dasharray="16 10"/>'}
   (ents||[]).forEach(function(e){
     var r=e.a*Math.PI/180,L=62,hl=20,hw=0.5,dx=Math.cos(r),dy=Math.sin(r);
