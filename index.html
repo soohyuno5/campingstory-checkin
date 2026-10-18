@@ -347,6 +347,7 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
 .sk-final #s3 .rcard li.loud u,.sk-final #s4 .rcard li.loud u,.sk-final #s5 .rcard li.loud u{text-decoration:none}
 .sk-final #s3 .rcard li.loud .st2,.sk-final #s4 .rcard li.loud .st2,.sk-final #s5 .rcard li.loud .st2{font-size:18px;letter-spacing:2px;flex:none}
 .sk-final #s3 .ck .rk2,.sk-final #s4 .ck .rk2,.sk-final #s5 .ck .rk2{width:28px;height:28px;margin:3px 0 0}
+.sk-final #s5 .rcard li.loud u{text-wrap:balance}
 </style>
 <style>[hidden]{display:none!important}html{color-scheme:light}body{margin:0}img{max-width:100%}</style>
 </head>
@@ -431,7 +432,7 @@ body{padding:0}.wrap{max-width:none}.app.sk-final{border-radius:0;box-shadow:non
         <div class="rcard"><ul>
           <li>일반쓰레기는 반드시 종량제 봉투에 담아 주세요. 봉투가 없으면 매점에 문의해 주세요.</li>
           <li>캔, 플라스틱, 종이는 부피를 압축해서 배출해 주세요.</li>
-          <li class="loud"><span class="st2">★</span><u>개수대에서는 떡, 과일껍질, 뼈처럼 갈리지 않는 것은 일반쓰레기로 버려 주세요</u><span class="st2">★</span></li>
+          <li class="loud"><span class="st2">★★★</span><u>개수대에서는 떡, 과일껍질, 뼈처럼 갈리지 않는 것은 일반쓰레기로 버려 주세요</u><span class="st2">★★★</span></li>
           <li>걸러서 배출하지 않아 고장이나 파손이 생기면 변상해 주셔야 해요.</li>
         </ul></div>
       </section>
@@ -544,7 +545,7 @@ var DESC={
  shop:['체크인·매점','문의와 종량제 봉투는 이곳에서 도와드려요.','공용 냉장고, 냉동실, 전자레인지도 이 안에 있어요.']
 };
 function rd(id){var a=DESC[id];return '<b>'+a[0]+'</b>'+a.slice(1).map(function(x){return typeof x=='string'?'<span class="ln">'+x+'</span>':'<span class="ln loud2">'+x.l+'</span>'}).join('')}
-var BUILD='20261018-123339';
+var BUILD='20261018-124022';
 var API='https://script.google.com/macros/s/AKfycbx5fWScKYSlTeyHdk4sJQJrdgGvF0uwOFw156_fCzwGczBEp9cK1DPlgXJ-xlpXKUTs/exec';
 var KEY='';
 (function(){
